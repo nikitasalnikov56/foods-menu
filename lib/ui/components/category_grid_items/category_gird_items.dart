@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_work/blocks/dishes_bloc/dishes_bloc.dart';
 import 'package:flutter_test_work/domain/provider/category_provider.dart';
+
 import 'package:flutter_test_work/ui/components/alert_dialog_image/alert_dialog_image.dart';
 import 'package:flutter_test_work/ui/components/tab_bar_items/tab_bar_items.dart';
 import 'package:flutter_test_work/ui/components/text_price/text_price.dart';
@@ -9,11 +10,24 @@ import 'package:flutter_test_work/ui/theme/app_colors.dart';
 import 'package:flutter_test_work/ui/theme/app_style.dart';
 import 'package:provider/provider.dart';
 
+// (
+//                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//                       crossAxisCount: 3),
+//                   children: state.loadedDishes.dishes!
+//                       .where(
+//                         (element) => element.tegs!.contains(
+//                           model.tags.toString(),
+//                         ),
+//                       )
+//                       .map((e) => Container())
+//                       .toList(),
+//                 ),
+
 class CategoryGirdItems extends StatelessWidget {
   const CategoryGirdItems({super.key});
   @override
   Widget build(BuildContext context) {
-    // final model = Provider.of<CategoryProvider>(context);
+    final model = Provider.of<CategoryProvider>(context);
     return BlocBuilder<DishesBloc, DishesState>(
       builder: (context, state) {
         if (state is DishesLoadingState) {
@@ -41,12 +55,15 @@ class CategoryGirdItems extends StatelessWidget {
                     childAspectRatio: 0.7,
                   ),
                   itemBuilder: (context, i) {
+                    // final apiTags = state.loadedDishes.dishes?[i].tegs;
+                    // final modelTags = model.tags[i];
                     return GestureDetector(
                       onTap: () {
                         showDialog(
                             context: context,
                             builder: (context) {
                               return Product(
+                                model: model,
                                 state: state,
                                 index: i,
                               );
@@ -105,12 +122,13 @@ class Product extends StatelessWidget {
     super.key,
     required this.state,
     required this.index,
+    required this.model,
   });
   final DishesLoadedState state;
   final int index;
+  final CategoryProvider model;
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<CategoryProvider>();
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

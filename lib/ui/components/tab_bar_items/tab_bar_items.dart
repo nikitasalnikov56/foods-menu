@@ -23,7 +23,8 @@ class TabBarItems extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             model.setIndex(index);
-            model.sortedDishes(index, state);
+            // model.sortedDishes(index, state);
+            model.inputTags(index);
           },
           child: Container(
             decoration: BoxDecoration(

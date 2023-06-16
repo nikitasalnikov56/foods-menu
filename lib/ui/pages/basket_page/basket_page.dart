@@ -5,7 +5,6 @@ import 'package:flutter_test_work/domain/provider/category_provider.dart';
 import 'package:flutter_test_work/ui/components/app_bar_widget/app_bar_widget.dart';
 import 'package:flutter_test_work/ui/theme/app_colors.dart';
 import 'package:flutter_test_work/ui/theme/app_style.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -70,19 +69,19 @@ class BasketPage extends StatelessWidget {
                                   IconButton(
                                     padding: const EdgeInsets.all(0),
                                     onPressed: () {
-                                   
+                                      model.deleteItem(index);
                                     },
                                     icon: const Icon(Icons.remove),
                                   ),
                                   Text(
-                                    '${model.ammount}',
+                                    '${model.amount}',
                                     style: AppStyle.fontStyle
                                         .copyWith(fontSize: 14),
                                   ),
                                   IconButton(
                                     padding: const EdgeInsets.all(0),
                                     onPressed: () {
-                                    
+                                   
                                     },
                                     icon: const Icon(Icons.add),
                                   ),
@@ -103,7 +102,7 @@ class BasketPage extends StatelessWidget {
                 backgroundColor: AppColors.blueColor,
                 onPressed: () {},
                 label: Text(
-                  'Оплатить ${model.state} ₽',
+                  'Оплатить ${model.sum} ₽',
                   style: AppStyle.fontStyle.copyWith(
                     fontSize: 16,
                     color: AppColors.whiteColor,
