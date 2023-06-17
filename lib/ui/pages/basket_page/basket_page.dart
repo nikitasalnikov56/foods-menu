@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test_work/domain/hive/basket_list.dart';
 import 'package:flutter_test_work/domain/hive/hive_boxes.dart';
@@ -29,9 +30,9 @@ class BasketPage extends StatelessWidget {
                     return ListView.separated(
                         itemBuilder: (context, index) {
                           return ListTile(
-                            leading: Image.network(
-                              value.getAt(index)!.imgUrl ??
-                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png',
+                            leading: CachedNetworkImage(
+                              imageUrl: '${value.getAt(index)?.imgUrl}',
+                              width: 48,
                               fit: BoxFit.cover,
                             ),
                             title: Text(value.getAt(index)?.name ?? 'Error'),
@@ -80,9 +81,7 @@ class BasketPage extends StatelessWidget {
                                   ),
                                   IconButton(
                                     padding: const EdgeInsets.all(0),
-                                    onPressed: () {
-                                   
-                                    },
+                                    onPressed: () {},
                                     icon: const Icon(Icons.add),
                                   ),
                                 ],

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test_work/blocks/dishes_bloc/dishes_bloc.dart';
 import 'package:flutter_test_work/ui/components/row_buttons/row_buttons.dart';
@@ -25,8 +26,8 @@ class AlertDialogImage extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.center,
-            child: Image.network(
-              '${state.loadedDishes.dishes?[index].imageUrl}',
+            child: CachedNetworkImage(
+              imageUrl: '${state.loadedDishes?[index].imageUrl}',
               width: 198,
               fit: BoxFit.cover,
             ),

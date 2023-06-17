@@ -25,6 +25,15 @@ class TabBarItems extends StatelessWidget {
             model.setIndex(index);
             // model.sortedDishes(index, state);
             model.inputTags(index);
+            if (model.sortTegs == 'Все меню') {
+              context.read<DishesBloc>().add(DishesLoadEvent());
+            } else if (model.sortTegs == 'Салаты') {
+              context.read<DishesBloc>().add(DishesSaladEvent());
+            } else if (model.sortTegs == 'С рисом') {
+              context.read<DishesBloc>().add(DishesRiseEvent());
+            } else {
+              context.read<DishesBloc>().add(DishesFishEvent());
+            }
           },
           child: Container(
             decoration: BoxDecoration(

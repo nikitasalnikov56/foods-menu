@@ -8,31 +8,19 @@ import 'package:flutter_test_work/ui/pages/main_page/main_page.dart';
 import 'package:flutter_test_work/ui/pages/profile_page/profile_page.dart';
 import 'package:flutter_test_work/ui/pages/search_page/search_page.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryProvider extends ChangeNotifier {
   CategoryProvider() {
     getSum();
+    final DateTime dateTime = DateTime.now();
+    date = DateFormat('d MMMM, yyyy', 'ru').format(dateTime);
   }
+  late String date;
 
   DishesCategory? dishesCategory;
   DishesLoadedState? state;
-
-  List<Widget> screens = [
-    const MainPage(),
-    const SearchPage(),
-    const BasketPage(),
-    const ProfilePage(),
-  ];
-
-  int count = 0;
-
-  setIndex(int index) {
-    count = index;
-    notifyListeners();
-  }
-
-  // sort list
   String sortTegs = '';
   List<Dishes>? sortedList;
   List<String> tags = [
@@ -41,30 +29,26 @@ class CategoryProvider extends ChangeNotifier {
     'С рисом',
     'С рыбой',
   ];
+  int count = 0;
+
+  List<Widget> screens = [
+    const MainPage(),
+    const SearchPage(),
+    const BasketPage(),
+    const ProfilePage(),
+  ];
+
+  setIndex(int index) {
+    count = index;
+    notifyListeners();
+  }
 
   inputTags(int index) {
     sortTegs = tags[index];
   }
 
-  Future<void> sortedDishes(int index, DishesLoadedState state) async {
-    List<String>? listTags;
-    listTags = state.loadedDishes.dishes?[index].tegs;
-    var list =
-        listTags?.where((element) => element == tags[index]).toList().join();
-    if (list == tags[index]) {
-      sortedList = state.loadedDishes.dishes;
-
-      notifyListeners();
-    }
-  }
-
   // basket page
   int amount = 1;
-  List<int> myAmmount = [];
-
-  inremCount() {
-    notifyListeners();
-  }
 
   List<int> myArray = [];
 
@@ -98,10 +82,10 @@ class CategoryProvider extends ChangeNotifier {
     await box
         .add(
           BasketList(
-            imgUrl: '${state.loadedDishes.dishes?[index].imageUrl}',
-            name: '${state.loadedDishes.dishes?[index].name}',
-            price: state.loadedDishes.dishes?[index].price,
-            weight: state.loadedDishes.dishes?[index].weight,
+            imgUrl: '${state.loadedDishes?[index].imageUrl}',
+            name: '${state.loadedDishes?[index].name}',
+            price: state.loadedDishes?[index].price,
+            weight: state.loadedDishes?[index].weight,
           ),
         )
         .then((value) => sumTotal())

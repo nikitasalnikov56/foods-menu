@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_work/blocks/dishes_bloc/dishes_bloc.dart';
@@ -9,19 +10,6 @@ import 'package:flutter_test_work/ui/components/text_price/text_price.dart';
 import 'package:flutter_test_work/ui/theme/app_colors.dart';
 import 'package:flutter_test_work/ui/theme/app_style.dart';
 import 'package:provider/provider.dart';
-
-// (
-//                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                       crossAxisCount: 3),
-//                   children: state.loadedDishes.dishes!
-//                       .where(
-//                         (element) => element.tegs!.contains(
-//                           model.tags.toString(),
-//                         ),
-//                       )
-//                       .map((e) => Container())
-//                       .toList(),
-//                 ),
 
 class CategoryGirdItems extends StatelessWidget {
   const CategoryGirdItems({super.key});
@@ -55,8 +43,6 @@ class CategoryGirdItems extends StatelessWidget {
                     childAspectRatio: 0.7,
                   ),
                   itemBuilder: (context, i) {
-                    // final apiTags = state.loadedDishes.dishes?[i].tegs;
-                    // final modelTags = model.tags[i];
                     return GestureDetector(
                       onTap: () {
                         showDialog(
@@ -87,14 +73,14 @@ class CategoryGirdItems extends StatelessWidget {
                                 color: AppColors.cardColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Image.network(
-                                '${state.loadedDishes.dishes?[i].imageUrl}',
+                              child: CachedNetworkImage(
+                                imageUrl: '${state.loadedDishes?[i].imageUrl}',
                                 fit: BoxFit.cover,
                               ),
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              '${state.loadedDishes.dishes?[i].name}',
+                              '${state.loadedDishes?[i].name}',
                               style: AppStyle.fontStyle.copyWith(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -105,7 +91,7 @@ class CategoryGirdItems extends StatelessWidget {
                       ),
                     );
                   },
-                  itemCount: state.loadedDishes.dishes?.length,
+                  itemCount: state.loadedDishes?.length,
                 ),
               ),
             ],
@@ -142,7 +128,7 @@ class Product extends StatelessWidget {
           AlertDialogImage(state: state, index: index),
           const SizedBox(height: 8),
           Text(
-            '${state.loadedDishes.dishes?[index].name}',
+            '${state.loadedDishes?[index].name}',
             style: AppStyle.fontStyle.copyWith(
               fontSize: 16,
             ),
@@ -154,7 +140,7 @@ class Product extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '${state.loadedDishes.dishes?[index].description}',
+            '${state.loadedDishes?[index].description}',
             style: AppStyle.fontStyle.copyWith(
               fontSize: 14,
               fontWeight: FontWeight.w400,

@@ -15,23 +15,74 @@ class DishesBloc extends Bloc<DishesEvent, DishesState> {
       try {
         final DishesCategory dishesCategory =
             await dishesRepository.getAllDishes();
-        emit(DishesLoadedState(loadedDishes: dishesCategory));
+
+        emit(
+          DishesLoadedState(
+            dishesCategory: dishesCategory,
+            loadedDishes: dishesCategory.dishes
+                ?.where((el) => el.tegs!.contains('Все меню'))
+                .toList(),
+          ),
+        );
       } catch (_) {
         emit(DishesErrorState());
       }
     });
-    
+
+    on<DishesSaladEvent>((event, emit) async {
+      emit(DishesLoadingState());
+      try {
+        final DishesCategory dishesCategory =
+            await dishesRepository.getAllDishes();
+
+        emit(
+          DishesLoadedState(
+            dishesCategory: dishesCategory,
+            loadedDishes: dishesCategory.dishes
+                ?.where((el) => el.tegs!.contains('Салаты'))
+                .toList(),
+          ),
+        );
+      } catch (_) {
+        emit(DishesErrorState());
+      }
+    });
+    on<DishesRiseEvent>((event, emit) async {
+      emit(DishesLoadingState());
+      try {
+        final DishesCategory dishesCategory =
+            await dishesRepository.getAllDishes();
+
+        emit(
+          DishesLoadedState(
+            dishesCategory: dishesCategory,
+            loadedDishes: dishesCategory.dishes
+                ?.where((el) => el.tegs!.contains('С рисом'))
+                .toList(),
+          ),
+        );
+      } catch (_) {
+        emit(DishesErrorState());
+      }
+    });
+    on<DishesFishEvent>((event, emit) async {
+      emit(DishesLoadingState());
+
+      try {
+        final DishesCategory dishesCategory =
+            await dishesRepository.getAllDishes();
+
+        emit(
+          DishesLoadedState(
+            dishesCategory: dishesCategory,
+            loadedDishes: dishesCategory.dishes
+                ?.where((el) => el.tegs!.contains('С рыбой'))
+                .toList(),
+          ),
+        );
+      } catch (_) {
+        emit(DishesErrorState());
+      }
+    });
   }
-  
 }
-
-
-  // String sakdj = 'a';
-  // List names = ['a', 'b', 'c'];
-  // List filteredList = [];
-
-  // for (var i = 0; i < names.length; i++) {
-  //   if (sakdj== names[i]) {
-      
-  //   }
-  // }

@@ -12,13 +12,13 @@ class TextPrice extends StatelessWidget {
     return Row(
       children: [
         Text(
-          '${state.loadedDishes.dishes?[index].price}₽ · ',
+          '${state.loadedDishes?[index].price}₽ · ',
           style: AppStyle.fontStyle.copyWith(
             fontSize: 14,
           ),
         ),
         Text(
-          '${state.loadedDishes.dishes?[index].weight}г',
+          '${state.loadedDishes?[index].weight}г',
           style: AppStyle.fontStyle.copyWith(
             fontSize: 14,
             color: AppColors.blackColor.withOpacity(0.4),

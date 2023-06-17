@@ -41,7 +41,8 @@ class CategoryList extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
+                      image: 
+                      NetworkImage(
                         '${state.loadedCategories.category?[i].imageUrl}',
                       ),
                       fit: BoxFit.cover,

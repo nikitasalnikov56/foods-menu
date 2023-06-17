@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_work/domain/provider/category_provider.dart';
 import 'package:flutter_test_work/ui/theme/app_colors.dart';
 import 'package:flutter_test_work/ui/theme/app_style.dart';
+import 'package:provider/provider.dart';
 
 class AppBarTitle extends StatelessWidget {
   const AppBarTitle({
@@ -9,6 +11,7 @@ class AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<CategoryProvider>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,7 +20,7 @@ class AppBarTitle extends StatelessWidget {
           style: AppStyle.fontStyle.copyWith(height: 1),
         ),
         Text(
-          '12 Августа, 2023',
+          model.date,
           style: AppStyle.fontStyle.copyWith(
             color: AppColors.lightBlackColor,
             fontWeight: FontWeight.w400,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test_work/domain/provider/category_provider.dart';
 import 'package:flutter_test_work/ui/resources/svg_icons.dart';
@@ -27,6 +28,11 @@ class MaterialAppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       home: const ScaffoldWidget(),
