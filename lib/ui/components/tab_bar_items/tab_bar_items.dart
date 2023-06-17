@@ -8,9 +8,7 @@ import 'package:provider/provider.dart';
 class TabBarItems extends StatelessWidget {
   const TabBarItems({
     super.key,
-    required this.state,
   });
-  final DishesLoadedState state;
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<CategoryProvider>(context);

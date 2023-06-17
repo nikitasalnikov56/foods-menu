@@ -26,10 +26,7 @@ class CategoryGirdItems extends StatelessWidget {
         if (state is DishesLoadedState) {
           return Column(
             children: [
-              SizedBox(
-                height: 35,
-                child: TabBarItems(state: state),
-              ),
+              
               const SizedBox(
                 height: 16,
               ),
